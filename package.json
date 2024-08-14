@@ -1,7 +1,6 @@
 {
   "name": "qa.mobile-test.webdriverio",
-  "module": "commonjs",
-  "target": "es2022",
+  "type": "module",
   "devDependencies": {
     "@babel/core": "^7.24.9",
     "@babel/preset-env": "^7.24.8",

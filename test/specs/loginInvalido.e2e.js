@@ -1,16 +1,15 @@
+import LoginScreen from "../pageobjects/more/login.screen.js"
+import LoginOrCreatAccountScreen from "../pageobjects/more/loginOrCreatAccount.screen.js"
+import MoreScreen from "../pageobjects/more/more.screen.js"
+import OnboardingScreen from "../pageobjects/onboarding.screen.js"
 
-
-const { default: Login } = require("../pageobjects/more/loginOrCreatAccount/login/login.screen")
-const { LoginOrCreatAccount } = require("../pageobjects/more/loginOrCreatAccount/loginOrCreatAccount.screen")
-const { MoreScreen } = require("../pageobjects/more/more.screen")
-const { OnboardingScreen } = require("../pageobjects/onboarding.screen")
 
 describe('Wikipedia', () => {
     it('abrindo o aplicativo wikipedia', async () => {
         const onboarding = new OnboardingScreen()
         const more = new MoreScreen()
-        const loginOrCreatAccount = new LoginOrCreatAccount()
-        const login = new Login()
+        const loginOrCreatAccount = new LoginOrCreatAccountScreen()
+        const login = new LoginScreen()
 
         await onboarding.clickBtnSkip()
 
@@ -24,13 +23,13 @@ describe('Wikipedia', () => {
         await loginOrCreatAccount.clickBtnLogin()
 
         //Preencher nome de usuário e senha
-        await login.setUsername()
-        await login.setPassword()
+        await login.setUsername('tstwikipedia')
+        await login.setPassword('147258')
 
         //Clicar em Entrar
         await login.clickBtnLogin()
 
         //Validar mensagem de login incorreto
-        expect(await login.getMessage()).toBe('O nome de utilizador ou a palavra-passe inseridos estão incorretos. Tente novamente, por favor.')
+        expect(await login.getMessage()).toBe('O nome de utilizador ou a palavra-passe inseridos estão incorretos.\nTente novamente, por favor.')
     })
 })
