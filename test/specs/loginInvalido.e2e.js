@@ -1,35 +1,37 @@
-import LoginScreen from "../pageobjects/more/login.screen.js"
-import LoginOrCreatAccountScreen from "../pageobjects/more/loginOrCreatAccount.screen.js"
-import MoreScreen from "../pageobjects/more/more.screen.js"
-import OnboardingScreen from "../pageobjects/onboarding.screen.js"
+import LoginActionsScreen from "../pageobjects/more/loginOrCreatAccount/login/login.actions.screen.js"
+import LoginQuestionScreen from "../pageobjects/more/loginOrCreatAccount/login/login.question.screen.js"
+import LoginOrCreatAccountActionsScreen from "../pageobjects/more/loginOrCreatAccount/loginOrCreatAccount.Actions.screen.js"
+import MoreActionsScreen from "../pageobjects/more/more.actions.screen.js"
+import OnboardingActionsScreen from "../pageobjects/onboarding.actions.screen.js"
 
 
 describe('Wikipedia', () => {
     it('abrindo o aplicativo wikipedia', async () => {
-        const onboarding = new OnboardingScreen()
-        const more = new MoreScreen()
-        const loginOrCreatAccount = new LoginOrCreatAccountScreen()
-        const login = new LoginScreen()
+        const onboardingActions = new OnboardingActionsScreen()
+        const moreActions = new MoreActionsScreen()
+        const loginOrCreatAccountActions = new LoginOrCreatAccountActionsScreen()
+        const loginAction = new LoginActionsScreen()
+        const loginQuestion = new LoginQuestionScreen()
 
-        await onboarding.clickBtnSkip()
+        await onboardingActions.clickBtnSkip()
 
         //clicar 'Mais'
-        await more.clickBtnMore()
+        await moreActions.clickBtnMore()
 
         //clicar em Entrar/Juntar-se
-        await loginOrCreatAccount.clickLogin()
+        await loginOrCreatAccountActions.clickLogin()
 
         //Clicar em Entrar
-        await loginOrCreatAccount.clickBtnLogin()
+        await loginOrCreatAccountActions.clickBtnLogin()
 
         //Preencher nome de usuário e senha
-        await login.setUsername('tstwikipedia')
-        await login.setPassword('147258')
+        await loginAction.setUsername('tstwikipedia')
+        await loginAction.setPassword('147258')
 
         //Clicar em Entrar
-        await login.clickBtnLogin()
+        await loginAction.clickBtnLogin()
 
         //Validar mensagem de login incorreto
-        expect(await login.getMessage()).toBe('O nome de utilizador ou a palavra-passe inseridos estão incorretos.\nTente novamente, por favor.')
+        await loginQuestion.getMessage('O nome de utilizador ou a palavra-passe inseridos estão incorretos.\nTente novamente, por favor.')
     })
 })
